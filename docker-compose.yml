@@ -25,3 +25,27 @@ services:
         hard: 1024
     env_file:
       - "compose.env"
+
+  ###
+  # GEMPAK LDM
+  ###
+  gempak:
+    image: unidata/ldm-docker:gempak
+    container_name: ldm-gempak
+    # restart: always
+    volumes:
+      # change defaults to your liking
+      - ./etc/:/home/ldm/etc/
+      - ./data/:/home/ldm/var/data/
+      - ./queues:/home/ldm/var/queues/
+      - ./logs/:/home/ldm/var/logs/
+      - ./cron/:/var/spool/cron/
+      - ./data/:/data/
+    ports:
+      - "388:388"
+    ulimits:
+      nofile:
+        soft: 1024
+        hard: 1024
+    env_file:
+      - "compose.env"
